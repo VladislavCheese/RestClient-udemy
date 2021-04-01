@@ -14,23 +14,28 @@ import java.util.List;
 public class Communication {
 
     private RestTemplate restTemplate;
+
     @Autowired
     public void setRestTemplate(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
-    private String URL = "http://localhost:8080/RestSpringMVC/api/people";
 
-    public List<People> getAllPeople(){
+    private final String URL = "http://localhost:8080/RestSpringMVC/api/people";
+
+    public List<People> getAllPeople() {
         ResponseEntity<List<People>> responseEntity = restTemplate.exchange(URL, HttpMethod.GET, null,
-                new ParameterizedTypeReference<List<People>>() {});
+                new ParameterizedTypeReference<List<People>>() {
+                });
 
         return responseEntity.getBody();
     }
-    public People getPerson(int id){
+
+    public People getPerson(int id) {
 
         return restTemplate.getForObject(URL + "/" + id, People.class);
 
     }
+
     public void savePerson(People person) {
         int id = person.getPeopleId();
         if (id == 0) {
@@ -38,16 +43,15 @@ public class Communication {
 
             System.out.println("New person was added.");
             System.out.println(responseEntity.getBody());
-        }
-        else {
-            restTemplate.put(URL,HttpMethod.PUT,person);
+        } else {
+            restTemplate.put(URL, person);
 
             System.out.println("Person with ID = " + id + " was updated.");
         }
     }
 
 
-    public void deletePerson(int id){
+    public void deletePerson(int id) {
         restTemplate.delete(URL + "/" + id);
         System.out.println("Person with ID = " + id + " was deleted");
     }

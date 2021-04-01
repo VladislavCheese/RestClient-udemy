@@ -17,12 +17,13 @@ public class App
         Communication communication = context.getBean("communication",Communication.class);
         List<People> allPeople = communication.getAllPeople();
         System.out.println(allPeople);
-        People person = communication.getPerson(2);
-        System.out.println(person);
-        People forTestPerson = new People("Pasha","Smirnov","HR", 325);
-        communication.savePerson(forTestPerson);
-        forTestPerson.setPeopleId(12);
-        communication.savePerson(forTestPerson);
-        communication.deletePerson(12);
+//        People person = communication.getPerson(2);
+//        System.out.println(person);
+//        person.setDepartment("Another Department");
+//        communication.savePerson(person);
+//        People forTestPerson = new People("Kasha","Smirnova","WebDis", 325);
+//        communication.savePerson(forTestPerson);
+        communication.deletePerson(8);
+
     }
 }
